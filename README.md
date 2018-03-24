@@ -7,3 +7,6 @@ Requirements
 * PyCryptodome
 
 Run the program by executing any of the python files
+
+## Nonces
+I generated my nonces using the `getrandbits()` function from `Crypto.Random.random`

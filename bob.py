@@ -42,7 +42,7 @@ if __name__ == '__main__':
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     sock.settimeout(10)
     sock.bind((server_address, server_port))
-    print('Listening on ' + server_address + ':' + str(server_port))
+    print('Bob: Listening on ' + server_address + ':' + str(server_port))
 
     while True:
         # Waits for message from Alice
@@ -52,7 +52,7 @@ if __name__ == '__main__':
         # Receives first message from Alice and responds with an encrypted nonce
         if payload.decode() == 'Let\'s talk':
             bobs_nonce = getrandbits(32)
-            print('Let\'s talk received, sending ' + str(bobs_nonce) + ' as the nonce')
+            print('Bob: Let\'s talk received, sending ' + str(bobs_nonce) + ' as the nonce')
             message = encrypt(bobs_key, str(bobs_nonce).encode())
             sock.sendto(message, client_address)
             #exit()

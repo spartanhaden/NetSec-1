@@ -31,7 +31,7 @@ if __name__ == '__main__':
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     sock.settimeout(10)
     sock.bind((server_address, server_port))
-    print('Listening on ' + server_address + ':' + str(server_port))
+    print('KDC: Listening on ' + server_address + ':' + str(server_port))
 
     while True:
         # Waits for a message from Alice
@@ -44,9 +44,9 @@ if __name__ == '__main__':
         # Verify the message
 
         if len(split_payload) != 4:
-            print("Wrong amount of info received")
+            print("KDC: Wrong amount of info received")
         elif split_payload[1] == b'Alice' and split_payload[2] == b'Bob':
-            print("Message from Alice received, sending response")
+            print("KDC: Message from Alice received, sending response")
             alices_nonce = split_payload[0]
             bobs_encrypted_nonce = split_payload[3]
 
@@ -57,8 +57,6 @@ if __name__ == '__main__':
             # Form the response to Alice
             response = alices_nonce + b' Bob ' + alices_key + bobs_key + b' ' + encrypted_ticket
             message = encrypt(alices_key, response)
-
-            print(message)
 
             # Send the response to Alice
             sock.sendto(message, client_address)

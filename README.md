@@ -8,5 +8,8 @@ Requirements
 
 Run the program by executing any of the python files
 
+## Notes
+After spending ~6 hours trying to send the encrypted nonce as ASCII I gave up and just sent two messages one withe the encrypted nonce, and one with the tag.
+
 ## Nonces
 I generated my nonces using the `getrandbits()` function from `Crypto.Random.random`

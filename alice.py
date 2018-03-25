@@ -9,6 +9,7 @@ from Crypto.Random.random import getrandbits
 port = 8671
 kdc_port = 8888
 ip = '127.0.0.1'
+bob_server = (ip, port)
 
 alices_key = b'23FCE5AE61E7BFCB29AC85725E7EC77DB9DBA460EACA7458070B719CE0B1DC31'
 
@@ -46,7 +47,7 @@ if __name__ == '__main__':
 
     # Send initial message to Bob
     print('Sending "Let\'s Talk" to Bob')
-    sock.sendto('Let\'s talk'.encode(), (ip, port))
+    sock.sendto('Let\'s talk'.encode(), bob_server)
 
     # Receive message back from Bob
     print('Waiting for nonce from Bob')
@@ -59,7 +60,16 @@ if __name__ == '__main__':
 
     kdc_response = sock.recv(4096)
     decrypted_kdc = decrypt(alices_key, kdc_response)
-    print(decrypted_kdc)
+
+    kdc_split = decrypted_kdc.split()
+
+    print(kdc_split)
+
+    nonce2 = getrandbits(32)
+
+    encrypted_nonce2 = encrypt(kdc_split[2], str(nonce2).encode())
+
+    sock.sendto(kdc_split[3] + encrypted_nonce2, bob_server)
 
     # bobs_nonce = bob_cipher.decrypt_and_verify(ciphertext, tag)
     # print('Nonce received from bob is ' + str(bobs_nonce))

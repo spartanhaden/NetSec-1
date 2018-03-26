@@ -9,4 +9,8 @@ Requirements
 Run the program by executing any of the python files
 
 ## Nonces
-I generated my nonces using the `getrandbits()` function from `Crypto.Random.random`
+I generated my nonce's using the `getrandbits()` function from `Crypto.Random.random`. The nonce has been generated in lines 55 and 76 of `alice.py` and lines 54 and 80 of `bob.py`
+
+
+## File
+At the end bob will send the contents of `ForAlice.txt` to Alice, This file should preferably be under 256K.

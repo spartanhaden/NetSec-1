@@ -29,12 +29,12 @@ def encrypt(key, data):
 if __name__ == '__main__':
     # Setup socket
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    sock.settimeout(10)
     sock.bind((server_address, server_port))
     print('KDC: Listening on ' + server_address + ':' + str(server_port))
 
     while True:
         # Waits for a message from Alice
+        print()
         print('KDC: waiting for request...')
         payload, client_address = sock.recvfrom(4096)
 

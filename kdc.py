@@ -44,9 +44,9 @@ if __name__ == '__main__':
         # Verify the message
 
         if len(split_payload) != 4:
-            print("KDC: Wrong amount of info received")
+            print('KDC: Wrong amount of info received')
         elif split_payload[1] == b'Alice' and split_payload[2] == b'Bob':
-            print("KDC: Message from Alice received, sending response")
+            print('KDC: Message from Alice received, sending response')
             alices_nonce = split_payload[0]
             bobs_encrypted_nonce = split_payload[3]
 
